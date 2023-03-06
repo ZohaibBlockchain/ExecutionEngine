@@ -3,7 +3,7 @@ import WebSocket, { WebSocketServer } from 'ws';
 
 
 const wss = new WebSocketServer({ port: 8080 });
-const keepAlive = 10000;
+const keepAlive = 500;
 const keepAliveMsg =  JSON.stringify({"MESSAGE_TYPE":'KeepAlive',"INTERVAL":'10'});
 const EXECUTIONREPORT =  JSON.stringify({"MESSAGE_TYPE":'EXECUTIONREPORT',"INF":{}});
 const ORDER =  JSON.stringify({"MESSAGE_TYPE":'ORDER',"INF":{}});
@@ -15,8 +15,9 @@ wss.on('connection', function connection(ws) {
     ws.on('error', console.error);
     broadcastKeepalive(ws);
     ws.on('message', function message(data) {
-        let msg = JSON.parse(data);
-        msgHandler(msg, ws);
+      console.log(data.toString());
+        // let msg = JSON.parse(data);
+        // msgHandler(msg, ws);
     });
     ws.on('spawn',()=>{
         console.log('New User S');
