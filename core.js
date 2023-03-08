@@ -1,14 +1,14 @@
 //Initially it will work with IP whitelisting
 import WebSocket, { WebSocketServer } from 'ws';
 
-
+//nodemon --exec
 const wss = new WebSocketServer({ port: 8877 });
 const keepAlive = 500;
 const keepAliveMsg =  JSON.stringify({"MESSAGE_TYPE":'KeepAlive',"INTERVAL":'10'});
 const EXECUTIONREPORT =  JSON.stringify({"MESSAGE_TYPE":'EXECUTIONREPORT',"INF":{}});
 const ORDER =  JSON.stringify({"MESSAGE_TYPE":'ORDER',"INF":{}});
 
-
+console.log('Server started');
 
 
 wss.on('connection', function connection(ws) {
